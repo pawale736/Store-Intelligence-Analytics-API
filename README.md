@@ -79,10 +79,27 @@ private Double confidence;
 **POST**
 
 ```http
-/api/events/ingest
+/events/ingest
 ```
 
-Request:
+Request Body:
+
+```json
+{
+  "eventId": "EVT001",
+  "storeId": "ST1008",
+  "visitorId": "VIS001",
+  "cameraId": "CAM1",
+  "eventType": "ENTRY",
+  "zoneId": "ENTRY",
+  "timestamp": "2026-04-10T10:15:22",
+  "dwellMs": 0,
+  "isStaff": false,
+  "confidence": 0.95
+}
+```
+
+Response:
 
 ```json
 {
@@ -106,8 +123,10 @@ Request:
 **GET**
 
 ```http
-/api/events
+/events
 ```
+
+Returns all events stored in the database.
 
 ---
 
@@ -116,98 +135,110 @@ Request:
 **GET**
 
 ```http
-/api/events/{eventId}
+/events/{eventId}
 ```
 
 Example:
 
 ```http
-/api/events/EVT001
+/events/EVT001
 ```
 
 ---
 
-### 4. Total Event Count
+### 4. Get Total Visitor Count
 
 **GET**
 
 ```http
-/api/analytics/events/count
+/analytics/visitors/count
 ```
+
+Returns total number of visitor records.
 
 ---
 
-### 5. Unique Visitor Count
+### 5. Get Unique Visitor Count
 
 **GET**
 
 ```http
-/api/analytics/visitors/count
+/analytics/visitors/uniqueCount
 ```
+
+Returns count of distinct visitors.
 
 ---
 
-### 6. Average Dwell Time
+### 6. Get Average Dwell Time
 
 **GET**
 
 ```http
-/api/analytics/dwell-time/avg
+/analytics/dwell-time/avg
 ```
 
-Returns average visitor dwell time in milliseconds.
+Returns average dwell time in milliseconds.
 
 ---
 
-### 7. Events By Store
+### 7. Get Events By Visitor
 
 **GET**
 
 ```http
-/api/stores/{storeId}/events
+/visitors/events/{visitorId}
 ```
 
 Example:
 
 ```http
-/api/stores/ST1008/events
+/visitors/events/VIS001
 ```
+
+Returns all events associated with the visitor.
 
 ---
 
-### 8. Events By Visitor
+### 8. Get Staff Count
 
 **GET**
 
 ```http
-/api/visitors/{visitorId}/events
+/analytics/staff/count
+```
+
+Returns count of staff events.
+
+---
+
+### 9. Get Customer Count
+
+**GET**
+
+```http
+/analytics/customers/count
+```
+
+Returns count of customer events.
+
+---
+
+### 10. Get Events By Zone
+
+**GET**
+
+```http
+/zones/{zoneId}/events
 ```
 
 Example:
 
 ```http
-/api/visitors/VIS001/events
+/zones/ENTRY/events
 ```
 
----
-
-### 9. Staff Count
-
-**GET**
-
-```http
-/api/analytics/staff/count
-```
-
----
-
-### 10. Customer Count
-
-**GET**
-
-```http
-/api/analytics/customers/count
-```
+Returns all events for a specific zone.
 
 ---
 
@@ -216,18 +247,18 @@ Example:
 **GET**
 
 ```http
-/api/analytics/zones
+/analytics/zones
 ```
 
-Returns zone-wise visitor counts.
+Returns zone-wise event distribution.
 
 Example Response:
 
 ```json
 [
   ["ENTRY", 50],
-  ["ELECTRONICS", 20],
-  ["BILLING", 15]
+  ["ELECTRONICS", 30],
+  ["BILLING", 20]
 ]
 ```
 
@@ -238,18 +269,21 @@ Example Response:
 **GET**
 
 ```http
-/api/analytics/peak-hours
+/analytics/peak-hours
 ```
+
+Returns visitor distribution grouped by hour.
 
 Example Response:
 
 ```json
 [
-  [18,120],
-  [17,110],
-  [19,95]
+  [18, 120],
+  [17, 110],
+  [19, 95]
 ]
 ```
+
 
 ---
 
