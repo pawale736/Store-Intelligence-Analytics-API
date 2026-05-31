@@ -283,7 +283,39 @@ Example Response:
   [19, 95]
 ]
 ```
+## API Documentation (Swagger UI)
 
+The project includes Swagger/OpenAPI documentation for easy API exploration and testing.
+
+After starting the application, open:
+
+```text
+http://localhost:8080/swagger-ui/index.html
+```
+
+Swagger provides an interactive interface to:
+
+* View all available endpoints
+* Test APIs directly from the browser
+* Inspect request and response schemas
+* Validate endpoint functionality without Postman
+
+### Available APIs
+
+| Method | Endpoint                          | Description          |
+| ------ | --------------------------------- | -------------------- |
+| POST   | `/events/ingest`                  | Ingest store events  |
+| GET    | `/events`                         | Retrieve all events  |
+| GET    | `/events/{eventId}`               | Retrieve event by ID |
+| GET    | `/analytics/visitors/count`       | Total visitor count  |
+| GET    | `/analytics/visitors/uniqueCount` | Unique visitor count |
+| GET    | `/analytics/dwell-time/avg`       | Average dwell time   |
+| GET    | `/analytics/staff/count`          | Staff count          |
+| GET    | `/analytics/customers/count`      | Customer count       |
+| GET    | `/analytics/peak-hours`           | Peak hour analytics  |
+| GET    | `/analytics/zones`                | Zone-wise analytics  |
+| GET    | `/visitors/events/{visitorId}`    | Events by visitor    |
+| GET    | `/zones/{zoneId}/events`          | Events by zone       |
 
 ---
 
